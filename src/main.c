@@ -2,27 +2,31 @@
 * @Author: Aswin Mohan <aswinmohan>
 * @Date:   2016-09-26T22:35:34+05:30
 * @Last modified by:   aswinmohan
-* @Last modified time: 2016-09-26T22:49:27+05:30
+* @Last modified time: 2016-09-26T22:57:13+05:30
 */
 
 #include <stdio.h>
+#include <stdlib.h>
 
-#define MAX_INPUT_SIZE 2048
+#include <editline/readline.h>
+#include <editline/history.h>
 
 int main(int argc, char const *argv[]) {
-
-    static char input[MAX_INPUT_SIZE];
 
     puts("Lispa ver 0.0.0.1" );
     puts("Press Ctrl+C to Quit ");
 
     while(1){
-        fputs("Lispa > " , stdout);
 
-        // Get a line of Input from the Console
-        fgets(input , MAX_INPUT_SIZE , stdin);
+        char *input = readline("Lisa > ");
+
+        // Add input to scrollable history
+        add_history(input);
 
         printf("Hey %s \n", input);
+
+        // Free allocated Memory
+        free(input);
     }
     return 0;
 }
